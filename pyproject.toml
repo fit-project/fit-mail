@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "fit-mail"
+version = "0.0.1"
+description = "FIT Mail Scraper Module"
+authors = ["FIT Project"]
+license = "LGPL-3.0-or-later"
+packages = [
+    { include = "fit_mail" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+PySide6 = "^6.9.0"
+
+
+fit-scraper = {git = "https://github.com/fit-project/fit-scraper.git", rev = "main"}
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
