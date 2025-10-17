@@ -285,7 +285,7 @@ QTreeView::indicator:hover {
 QTreeView::indicator:checked {
     background: 3px solid rgb(52, 59, 72);
 	border: 3px solid rgb(52, 59, 72);	
-	background-image: url(:/icons/cil-check-alt.png);
+	background-image: url(:/icons/icons/cil-check-alt.png);
 }
 
 QTreeView::item{
@@ -330,7 +330,7 @@ QComboBox::drop-down {
 	border-left-style: solid;
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;	
-	background-image: url(:/icons/cil-arrow-bottom.png);
+	background-image: url(:/icons/icons/cil-arrow-bottom.png);
 	background-position: center;
 	background-repeat: no-reperat;
  }
@@ -590,46 +590,6 @@ QComboBox QAbstractItemView {
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item>
-                 <widget class="QPushButton" name="acquisition_info">
-                  <property name="minimumSize">
-                   <size>
-                    <width>28</width>
-                    <height>28</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>28</width>
-                    <height>28</height>
-                   </size>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="toolTip">
-                   <string>Acquisition info</string>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QToolTip {font:13px;}</string>
-                  </property>
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="icon">
-                   <iconset>
-                    <normalon>../icons/info-circle.png</normalon>
-                    <disabledon>../icons/info-circle-disabled.png</disabledon>
-                   </iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>20</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
                 <item>
                  <widget class="QPushButton" name="case_button">
                   <property name="minimumSize">
@@ -1270,7 +1230,7 @@ QComboBox QAbstractItemView {
                           </property>
                           <property name="dateTime">
                            <datetime>
-                            <hour>12</hour>
+                            <hour>11</hour>
                             <minute>0</minute>
                             <second>0</second>
                             <year>1999</year>
@@ -1538,12 +1498,12 @@ color:red !important;
                        </widget>
                       </item>
                       <item>
-                       <layout class="QHBoxLayout" name="download_button_layout">
+                       <layout class="QHBoxLayout" name="save_message_button_layout">
                         <property name="bottomMargin">
                          <number>0</number>
                         </property>
                         <item>
-                         <spacer name="download_button_spacer">
+                         <spacer name="save_message_button_spacer">
                           <property name="orientation">
                            <enum>Qt::Horizontal</enum>
                           </property>
@@ -1559,7 +1519,7 @@ color:red !important;
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="download_button">
+                         <widget class="QPushButton" name="save_message_button">
                           <property name="enabled">
                            <bool>true</bool>
                           </property>
@@ -1582,7 +1542,7 @@ color:red !important;
                            <enum>Qt::LeftToRight</enum>
                           </property>
                           <property name="text">
-                           <string>Download</string>
+                           <string>Save messages</string>
                           </property>
                           <property name="iconSize">
                            <size>

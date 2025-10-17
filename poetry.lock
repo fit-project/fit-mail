@@ -515,7 +515,7 @@ xhtml2pdf = "^0.2.17"
 type = "git"
 url = "https://github.com/fit-project/fit-common.git"
 reference = "main"
-resolved_reference = "08dd28e15cb5397b541d8afc44db15c61d2c11eb"
+resolved_reference = "08c7c4755be84c3b28b9e68a08d7d7bfc867c133"
 
 [[package]]
 name = "fit-configurations"

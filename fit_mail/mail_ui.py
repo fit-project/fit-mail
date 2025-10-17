@@ -10,6 +10,8 @@
 
 from PySide6 import QtCore, QtGui, QtWidgets
 
+from fit_mail.lang import load_translations
+
 
 class Ui_fit_mail(object):
     def setupUi(self, fit_mail):
@@ -281,7 +283,7 @@ class Ui_fit_mail(object):
             "QTreeView::indicator:checked {\n"
             "    background: 3px solid rgb(52, 59, 72);\n"
             "    border: 3px solid rgb(52, 59, 72);    \n"
-            "    background-image: url(:/icons/cil-check-alt.png);\n"
+            "    background-image: url(:/icons/icons/cil-check-alt.png);\n"
             "}\n"
             "\n"
             "QTreeView::item{\n"
@@ -326,7 +328,7 @@ class Ui_fit_mail(object):
             "    border-left-style: solid;\n"
             "    border-top-right-radius: 3px;\n"
             "    border-bottom-right-radius: 3px;    \n"
-            "    background-image: url(:/icons/cil-arrow-bottom.png);\n"
+            "    background-image: url(:/icons/icons/cil-arrow-bottom.png);\n"
             "    background-position: center;\n"
             "    background-repeat: no-reperat;\n"
             " }\n"
@@ -436,48 +438,23 @@ class Ui_fit_mail(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setSpacing(5)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.acquisition_info = QtWidgets.QPushButton(
-            parent=self.right_buttons_container
-        )
-        self.acquisition_info.setMinimumSize(QtCore.QSize(28, 28))
-        self.acquisition_info.setMaximumSize(QtCore.QSize(28, 28))
-        self.acquisition_info.setCursor(
-            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
-        )
-        self.acquisition_info.setStyleSheet("QToolTip {font:13px;}")
-        self.acquisition_info.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(
-            QtGui.QPixmap("fit_mail/ui/../icons/info-circle.png"),
-            QtGui.QIcon.Mode.Normal,
-            QtGui.QIcon.State.On,
-        )
-        icon.addPixmap(
-            QtGui.QPixmap("fit_mail/ui/../icons/info-circle-disabled.png"),
-            QtGui.QIcon.Mode.Disabled,
-            QtGui.QIcon.State.On,
-        )
-        self.acquisition_info.setIcon(icon)
-        self.acquisition_info.setIconSize(QtCore.QSize(20, 20))
-        self.acquisition_info.setObjectName("acquisition_info")
-        self.horizontalLayout_2.addWidget(self.acquisition_info)
         self.case_button = QtWidgets.QPushButton(parent=self.right_buttons_container)
         self.case_button.setMinimumSize(QtCore.QSize(28, 28))
         self.case_button.setMaximumSize(QtCore.QSize(28, 28))
         self.case_button.setStyleSheet("QToolTip {font:13px;}")
         self.case_button.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(
+        icon = QtGui.QIcon()
+        icon.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_case.png"),
             QtGui.QIcon.Mode.Normal,
             QtGui.QIcon.State.On,
         )
-        icon1.addPixmap(
+        icon.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_case-disabled.png"),
             QtGui.QIcon.Mode.Disabled,
             QtGui.QIcon.State.On,
         )
-        self.case_button.setIcon(icon1)
+        self.case_button.setIcon(icon)
         self.case_button.setIconSize(QtCore.QSize(20, 20))
         self.case_button.setObjectName("case_button")
         self.horizontalLayout_2.addWidget(self.case_button)
@@ -499,18 +476,18 @@ class Ui_fit_mail(object):
         )
         self.configuration_button.setStyleSheet("QToolTip {font:13px;}")
         self.configuration_button.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_settings.png"),
             QtGui.QIcon.Mode.Normal,
             QtGui.QIcon.State.On,
         )
-        icon2.addPixmap(
+        icon1.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_settings-disabled.png"),
             QtGui.QIcon.Mode.Disabled,
             QtGui.QIcon.State.On,
         )
-        self.configuration_button.setIcon(icon2)
+        self.configuration_button.setIcon(icon1)
         self.configuration_button.setIconSize(QtCore.QSize(20, 20))
         self.configuration_button.setObjectName("configuration_button")
         self.horizontalLayout_2.addWidget(self.configuration_button)
@@ -524,18 +501,18 @@ class Ui_fit_mail(object):
         )
         self.minimize_button.setToolTip("")
         self.minimize_button.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_minimize.png"),
             QtGui.QIcon.Mode.Normal,
             QtGui.QIcon.State.On,
         )
-        icon3.addPixmap(
+        icon2.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_minimize-disabled.png"),
             QtGui.QIcon.Mode.Disabled,
             QtGui.QIcon.State.On,
         )
-        self.minimize_button.setIcon(icon3)
+        self.minimize_button.setIcon(icon2)
         self.minimize_button.setIconSize(QtCore.QSize(20, 20))
         self.minimize_button.setObjectName("minimize_button")
         self.horizontalLayout_2.addWidget(self.minimize_button)
@@ -547,18 +524,18 @@ class Ui_fit_mail(object):
         )
         self.close_button.setToolTip("")
         self.close_button.setText("")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_close.png"),
             QtGui.QIcon.Mode.Normal,
             QtGui.QIcon.State.On,
         )
-        icon4.addPixmap(
+        icon3.addPixmap(
             QtGui.QPixmap(":/icons/icons/icon_close-disabled.png"),
             QtGui.QIcon.Mode.Disabled,
             QtGui.QIcon.State.On,
         )
-        self.close_button.setIcon(icon4)
+        self.close_button.setIcon(icon3)
         self.close_button.setIconSize(QtCore.QSize(20, 20))
         self.close_button.setObjectName("close_button")
         self.horizontalLayout_2.addWidget(self.close_button)
@@ -772,7 +749,7 @@ class Ui_fit_mail(object):
         )
         self.search_date_from.setPalette(palette)
         self.search_date_from.setDateTime(
-            QtCore.QDateTime(QtCore.QDate(1999, 12, 31), QtCore.QTime(12, 0, 0))
+            QtCore.QDateTime(QtCore.QDate(1999, 12, 31), QtCore.QTime(11, 0, 0))
         )
         self.search_date_from.setTimeSpec(QtCore.Qt.TimeSpec.UTC)
         self.search_date_from.setObjectName("search_date_from")
@@ -869,28 +846,30 @@ class Ui_fit_mail(object):
         self.emails_tree.header().setVisible(False)
         self.emails_tree.header().setCascadingSectionResizes(False)
         self.topFrameRight.addWidget(self.emails_tree)
-        self.download_button_layout = QtWidgets.QHBoxLayout()
-        self.download_button_layout.setContentsMargins(-1, -1, -1, 0)
-        self.download_button_layout.setObjectName("download_button_layout")
+        self.save_messages_button_layout = QtWidgets.QHBoxLayout()
+        self.save_messages_button_layout.setContentsMargins(-1, -1, -1, 0)
+        self.save_messages_button_layout.setObjectName("save_messages_button_layout")
         spacerItem3 = QtWidgets.QSpacerItem(
             40,
             20,
             QtWidgets.QSizePolicy.Policy.Expanding,
             QtWidgets.QSizePolicy.Policy.Minimum,
         )
-        self.download_button_layout.addItem(spacerItem3)
-        self.download_button = QtWidgets.QPushButton(parent=self.select_email)
-        self.download_button.setEnabled(True)
-        self.download_button.setMinimumSize(QtCore.QSize(150, 30))
-        self.download_button.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        self.download_button.setCursor(
+        self.save_messages_button_layout.addItem(spacerItem3)
+        self.save_messages_button = QtWidgets.QPushButton(parent=self.select_email)
+        self.save_messages_button.setEnabled(True)
+        self.save_messages_button.setMinimumSize(QtCore.QSize(150, 30))
+        self.save_messages_button.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.save_messages_button.setCursor(
             QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         )
-        self.download_button.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.download_button.setIconSize(QtCore.QSize(0, 0))
-        self.download_button.setObjectName("download_button")
-        self.download_button_layout.addWidget(self.download_button)
-        self.topFrameRight.addLayout(self.download_button_layout)
+        self.save_messages_button.setLayoutDirection(
+            QtCore.Qt.LayoutDirection.LeftToRight
+        )
+        self.save_messages_button.setIconSize(QtCore.QSize(0, 0))
+        self.save_messages_button.setObjectName("save_messages_button")
+        self.save_messages_button_layout.addWidget(self.save_messages_button)
+        self.topFrameRight.addLayout(self.save_messages_button_layout)
         self.leftContentLayout.addWidget(self.select_email)
         self.horizontalLayout_4.addWidget(self.right_content)
         self.verticalLayout_6.addWidget(self.content)
@@ -985,29 +964,45 @@ class Ui_fit_mail(object):
         QtCore.QMetaObject.connectSlotsByName(fit_mail)
 
     def retranslateUi(self, fit_mail):
-        _translate = QtCore.QCoreApplication.translate
-        fit_mail.setWindowTitle(_translate("fit_mail", "FIT Mail Scaper"))
-        self.title_right_info.setText(_translate("fit_mail", "Mail Scraper"))
-        self.acquisition_info.setToolTip(_translate("fit_mail", "Acquisition info"))
-        self.case_button.setToolTip(_translate("fit_mail", "Case info"))
-        self.configuration_button.setToolTip(_translate("fit_mail", "Configuration"))
-        self.sever_configuration_title.setText(
-            _translate("fit_mail", "Server configuration")
+        self.__translations = load_translations()
+
+        fit_mail.setWindowTitle(self.__translations["WINDOW_TITLE"])
+        self.title_right_info.setText(self.__translations["TITLE_RIGHT_INFO"])
+        self.case_button.setToolTip(self.__translations["CASE_BUTTON_TOOLTIP"])
+        self.configuration_button.setToolTip(
+            self.__translations["CONFIGURATION_BUTTON_TOOLTIP"]
         )
-        self.login.setPlaceholderText(_translate("fit_mail", "example@example.com"))
-        self.password.setPlaceholderText(_translate("fit_mail", "password"))
-        self.server_name.setPlaceholderText(_translate("fit_mail", "imap.server.com"))
-        self.server_port.setPlaceholderText(_translate("fit_mail", "993"))
-        self.login_button.setText(_translate("fit_mail", "Login"))
-        self.search_criteria_title.setText(_translate("fit_mail", "Search criteria"))
-        self.label_from_date.setText(_translate("fit_mail", "From date"))
-        self.label_to_date.setText(_translate("fit_mail", "To date"))
-        self.search_email_from.setPlaceholderText(_translate("fit_mail", "From:"))
-        self.search_email_to.setPlaceholderText(_translate("fit_mail", "To:"))
-        self.search_email_subject.setPlaceholderText(_translate("fit_mail", "Subject:"))
-        self.search_button.setText(_translate("fit_mail", "Search"))
-        self.email_founded_title.setText(_translate("fit_mail", "Select e-mail"))
-        self.download_button.setText(_translate("fit_mail", "Download"))
-        self.credits_label.setText(_translate("fit_mail", "By: fit-project.org"))
-        self.status_message.setText(_translate("fit_mail", "status message"))
-        self.version.setText(_translate("fit_mail", "v1.0.3"))
+
+        self.sever_configuration_title.setText(
+            self.__translations["SERVER_CONFIGURATION"]
+        )
+        self.login.setPlaceholderText(self.__translations["LOGIN_PLACEHOLDER"])
+        self.password.setPlaceholderText(self.__translations["PASSWORD_PLACEHOLDER"])
+        self.server_name.setPlaceholderText(
+            self.__translations["SERVER_NAME_PLACEHOLDER"]
+        )
+        self.server_port.setPlaceholderText(
+            self.__translations["SERVER_PORT_PLACEHOLDER"]
+        )
+
+        self.login_button.setText(self.__translations["LOGIN_BUTTON"])
+        self.search_criteria_title.setText(self.__translations["SEARCH_CRITERIA_TITLE"])
+
+        self.label_from_date.setText(self.__translations["LABEL_FROM_DATE"])
+        self.label_to_date.setText(self.__translations["LABEL_TO_DATE"])
+        self.search_email_from.setPlaceholderText(
+            self.__translations["SEARCH_EMAIL_FROM_PLACEHOLDER"]
+        )
+        self.search_email_to.setPlaceholderText(
+            self.__translations["SEARCH_EMAIL_TO_PLACEHOLDER"]
+        )
+        self.search_email_subject.setPlaceholderText(
+            self.__translations["SEARCH_EMAIL_SUBJECT_PLACEHOLDER"]
+        )
+
+        self.search_button.setText(self.__translations["SEARCH_BUTTON_TEXT"])
+        self.email_founded_title.setText(self.__translations["EMAIL_FOUNDED_TITLE"])
+        self.save_messages_button.setText(self.__translations["SAVE_MESSAGES_BUTTON"])
+        self.credits_label.setText(self.__translations["CREDITS_LABEL"])
+        self.status_message.setText(self.__translations["STATUS_MESSAGE_TEXT"])
+        self.version.setText(self.__translations["VERSION_TEXT"])

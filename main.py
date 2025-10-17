@@ -10,7 +10,14 @@
 import argparse
 import sys
 
-from fit_common.core import DebugLevel, debug, set_debug_level, set_gui_crash_handler
+from fit_common.core import (
+    DebugLevel,
+    debug,
+    resolve_path,
+    set_debug_level,
+    set_gui_crash_handler,
+)
+from PySide6 import QtGui
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from fit_mail.mail import Mail
@@ -50,6 +57,8 @@ def main():
     app = QApplication(sys.argv)
 
     set_gui_crash_handler(show_crash_dialog)
+
+    app.setWindowIcon(QtGui.QIcon(resolve_path("icon.ico")))
 
     window = Mail()
     if window.has_valid_case:
