@@ -44,7 +44,7 @@
   "TWO_FACTOR_AUTH": "In case you enabled 2FA, please read this guide",
   "SAVE_MESSAGES_BUTTON": "Save Messages",
   "MAIL_SCRAPER_STARTED": "Mail Scraper started",
-  "MAIL_SCRAPER_COMPLETED": "Mail Scraper completed",
+  "MAIL_SCRAPER_COMPLETED": "{} Mail Scraper completed",
   "MAIL_SCRAPER_LOGGED_IN": "Logged with mail: {}  {}",
   "MAIL_SCRAPER_SEARCH_EMAILS": "The email search is finished with status: {}",
   "MAIL_SCRAPER_FETCH_EMAILS": "Found {} emails — estimated SAVE_MESSAGES time: {} minutes.",

@@ -29,13 +29,14 @@ from fit_mail.workers.search import MailSearchWorker
 
 class Mail(Scraper):
     def __init__(self, wizard=None):
-        logger = logging.getLogger("scrapers.mail")
+        logger = logging.getLogger("scraper.mail")
         packages = ["fit_mail.tasks"]
 
-        super().__init__(logger, "mail", packages, wizard)
+        super().__init__(logger, "email", packages, wizard)
 
         if self.has_valid_case:
             class_names.register("SAVE_MESSAGES", "TaskSaveMessages")
+            self.acquisition.stop_tasks = [class_names.SAVE_MESSAGES]
             self.__translations = load_translations()
             self.__mail_service = None
             self._is_logged_in = False
@@ -251,37 +252,10 @@ class Mail(Scraper):
         )
         dialog.exec()
 
-    def __start_task(self):
-        pass
-        # if self.acquisition_directory is None:
-        #     # Create acquisition directory
-        #     self.acquisition_directory = CaseController().create_acquisition_directory(
-        #         "email",
-        #         GeneralConfigurationController().configuration["cases_folder_path"],
-        #         self.case_info["name"],
-        #         self.server_configuration.findChild(
-        #             QtWidgets.QLineEdit, "login"
-        #         ).text(),
-        #     )
-
-        # if self.acquisition_directory is not None:
-        #     if self.is_task_started is False:
-        #         self.acquisition_manager.options = {
-        #             "acquisition_directory": self.acquisition_directory,
-        #             "type": "email",
-        #             "case_info": self.case_info,
-        #         }
-        #         self.acquisition_manager.load_tasks()
-        #         self.acquisition_manager.start()
-
-    def __start_task_is_finished(self):
-        self.is_task_started = True
-        self.__login()
-
     def __search(self):
-
         self.setEnabled(False)
         self.__spinner.start()
+        self.ui.emails_tree.clear()
         self._thread: QtCore.QThread | None = None
         self._worker: MailLoginWorker | None = None
 
@@ -406,15 +380,10 @@ class Mail(Scraper):
         self.__is_checked()
 
     def __save_messages(self):
-        self.__enable_all(self.select_email.children(), False)
-        self.__start_spinner()
-        self.is_acquisition_running = True
-        self.progress_bar.setValue(0)
-        self.progress_bar.setHidden(False)
-        self.status_message.setText("")
-        self.status_message.setHidden(False)
+        self.setEnabled(True)
+        self.__spinner.start()
 
-        emails_to_save_messages = {}
+        self.__emails_to_save_messages = {}
 
         emails_counter = 0
         for i in range(self.root.childCount()):
@@ -424,36 +393,33 @@ class Mail(Scraper):
                 email = folder.child(k)
                 if email.checkState(0) == QtCore.Qt.CheckState.Checked:
                     emails_counter += 1
-                    if folder_name in emails_to_save_messages:
-                        emails_to_save_messages[folder_name].append(email.text(0))
+                    if folder_name in self.__emails_to_save_messages:
+                        self.__emails_to_save_messages[folder_name].append(
+                            email.text(0)
+                        )
                     else:
-                        emails_to_save_messages[folder_name] = [email.text(0)]
+                        self.__emails_to_save_messages[folder_name] = [email.text(0)]
 
-        self.increment = 100 / emails_counter
-        self.acquisition_manager.options["emails_to_save_messages"] = (
-            emails_to_save_messages
-        )
-        self.acquisition_manager.save_messages()
+        self.__spinner.stop()
 
-    def __handle_progress(self):
-        self.progress_bar.setValue(self.progress_bar.value() + int(self.increment))
+        if self.create_acquisition_directory():
+            self.acquisition.options = {
+                "type": "email",
+                "case_info": self.case_info,
+                "acquisition_directory": self.acquisition_directory,
+                "emails_to_save": self.__emails_to_save_messages,
+                "mail_service": self.__mail_service,
+            }
 
-    def __acquisition_is_finished(self):
-        pass
-        # self.spinner.stop()
-        # self.__enable_all(self.server_configuration.children(), True)
-        # self.emails_tree.clear()
-        # self.progress_bar.setHidden(True)
-        # self.status_message.setHidden(True)
-        # self.acquisition_manager.log_end_message()
-        # self.acquisition_manager.set_completed_progress_bar()
-        # self.acquisition_manager.unload_tasks()
+            self.execute_start_tasks_flow()
 
-        # show_finish_acquisition_dialog(self.acquisition_directory)
+    def on_start_tasks_finished(self):
+        self.execute_stop_tasks_flow()
 
-        # self.acquisition_directory = None
-        # self.is_task_started = False
-        # self.is_acquisition_running = False
+    def on_post_acquisition_finished(self):
+        self.ui.emails_tree.clear()
+        self.ui.save_messages_button.setEnabled(False)
+        return super().on_post_acquisition_finished()
 
     def __is_valid_search_mail(self, text):
         self.is_valid_mail = self.__validate_mail(text)

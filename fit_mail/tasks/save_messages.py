@@ -19,6 +19,7 @@ from fit_mail.lang import load_translations
 
 class TaskSaveMessagesWorker(TaskWorker):
     def start(self):
+        self.started.emit()
         # Create acquisition folder
         self.acquisition_mail_dir = os.path.join(
             self.options.get("acquisition_directory"), "acquisition_mail"
@@ -27,7 +28,7 @@ class TaskSaveMessagesWorker(TaskWorker):
             os.makedirs(self.acquisition_mail_dir)
 
         emails_to_save = self.options.get("emails_to_save")
-        service = self.options.get("mail_controller")
+        service = self.options.get("mail_service")
 
         for folder, emails_list in emails_to_save.items():
             for emails in emails_list:
@@ -37,8 +38,8 @@ class TaskSaveMessagesWorker(TaskWorker):
                 service.write_emails(
                     email_id, self.acquisition_mail_dir, folder_stripped, folder
                 )
-                self.progress.emit()
         service.write_logs(self.options.get("acquisition_directory"))
+
         self.finished.emit()
 
 
@@ -52,21 +53,12 @@ class TaskSaveMessages(Task):
             progress_bar,
             status_bar,
             label=self.__translations["SAVE_MESSAGES"],
+            worker_class=TaskSaveMessagesWorker,
         )
-
-        self.__worker = TaskSaveMessagesWorker()
-        self.__worker.started.connect(self._started)
-        self.__worker.finished.connect(self._finished)
-        self.__worker.error.connect(self._handle_error)
 
     def start(self):
         super().start_task(self.__translations["MAIL_SCRAPER_STARTED"])
-        self.__worker.options = self.options
-        self.__worker.start()
 
     def _finished(self, status=Status.SUCCESS, details=""):
-        super()._finished(
-            status,
-            details,
-            self.__translations["MAIL_SCRAPER_COMPLETED"].format(status.name),
-        )
+        message = self.__translations["MAIL_SCRAPER_COMPLETED"].format(status.name)
+        super()._finished(status, details, message)
