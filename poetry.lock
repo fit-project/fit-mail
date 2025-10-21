@@ -515,7 +515,7 @@ xhtml2pdf = "^0.2.17"
 type = "git"
 url = "https://github.com/fit-project/fit-common.git"
 reference = "main"
-resolved_reference = "08c7c4755be84c3b28b9e68a08d7d7bfc867c133"
+resolved_reference = "e5756d6319fbc4d867c3ab10561345bb705b3cad"
 
 [[package]]
 name = "fit-configurations"
@@ -557,7 +557,7 @@ PySide6 = "6.9.0"
 type = "git"
 url = "https://github.com/fit-project/fit-scraper.git"
 reference = "main"
-resolved_reference = "0825f40479c2cf763d8ed5bf8e83a20fd7558a17"
+resolved_reference = "6134e6576f43bc5a33a6ba3b4149672990e3dd03"
 
 [[package]]
 name = "freetype-py"
