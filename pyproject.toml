@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fit-mail"
-version = "0.0.1"
+version = "3.0.0-beta"
 description = "FIT Mail Scraper Module"
 authors = ["FIT Project"]
 license = "LGPL-3.0-or-later"
