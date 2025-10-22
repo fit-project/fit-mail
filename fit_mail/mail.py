@@ -415,6 +415,8 @@ class Mail(Scraper):
 
     def on_start_tasks_finished(self):
         self.execute_stop_tasks_flow()
+        self.ui.status_message.setText("")
+        self.ui.status_message.setHidden(True)
 
     def on_post_acquisition_finished(self):
         self.ui.emails_tree.clear()
