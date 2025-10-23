@@ -74,6 +74,8 @@ class Mail(Scraper):
 
         # SET VERSION
         self.ui.version.setText(f"v{get_version()}")
+
+        # ADD GUIDE LINK
         self.ui.server_configuration_vlayout.addWidget(
             ClickableLabel(
                 self.__translations["TWO_FACTOR_AUTH_URL"],
