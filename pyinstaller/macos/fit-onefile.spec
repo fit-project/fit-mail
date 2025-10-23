@@ -8,7 +8,7 @@ from fit_common.core import get_version
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 
-datas = [('../../fit_mail/lang', './fit_mail/lang')]
+datas = [('../../fit_mail/lang', './fit_mail/lang'), , ('../../icon.ico', '.')]
 datas += collect_data_files('fit_assets', includes=['icons/', 'images/', 'templates/'])
 datas += collect_data_files('fit_common', includes=['lang/*.json'])
 datas += collect_data_files('fit_cases', includes=['lang/*.json'])
