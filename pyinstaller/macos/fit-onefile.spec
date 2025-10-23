@@ -75,7 +75,7 @@ try:
 
     subprocess.run([
         "hdiutil", "create", 
-        "-volname", "FitApp", 
+        "-volname", "FitMailApp", 
         "-srcfolder", str(dmg_folder), 
         "-ov", "-format", "UDZO", 
         str(dmg_file)
