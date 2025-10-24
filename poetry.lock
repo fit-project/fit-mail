@@ -501,7 +501,7 @@ sqlalchemy = "^2.0.40"
 type = "git"
 url = "https://github.com/fit-project/fit-cases.git"
 reference = "chore/update-python-compatibility-3.13"
-resolved_reference = "d23afe42141f190d46ac8e1560f0090957d341e2"
+resolved_reference = "3a7ba83d073b6f26cce8b5b865cbea594605e787"
 
 [[package]]
 name = "fit-common"
