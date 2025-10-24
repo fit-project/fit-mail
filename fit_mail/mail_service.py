@@ -218,7 +218,12 @@ class MailService:
         if subject != "":
             criteria.append(f'(SUBJECT "{subject}")')
 
-        locale.setlocale(locale.LC_ALL, "en_US")
+        for loc in ("en_US.UTF-8", "en_US.utf8", "C.UTF-8", "C"):
+            try:
+                locale.setlocale(locale.LC_TIME, loc)
+                break
+            except locale.Error:
+                continue
 
         criteria.append(
             f'(SINCE "{from_date.strftime("%d-%b-%Y")}" BEFORE "{to_date.strftime("%d-%b-%Y")}")'

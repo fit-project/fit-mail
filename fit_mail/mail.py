@@ -436,7 +436,7 @@ class Mail(Scraper):
 
     def __validate_mail(self, mail):
         email_validator = QtGui.QRegularExpressionValidator(
-            QtCore.QRegularExpression("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}")
+            QtCore.QRegularExpression(r"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}")
         )
         state = email_validator.validate(mail, 0)
         return bool(state[0] == QtGui.QRegularExpressionValidator.State.Acceptable)
