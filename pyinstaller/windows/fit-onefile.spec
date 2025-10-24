@@ -78,4 +78,4 @@ print(f"ZIP created: {zip_path}")
 
 if version_file_path.exists():
     version_file_path.unlink()
-    print(f"🧹 Rimosso {version_file_path}")
+    print(f"Rimosso {version_file_path}")

@@ -97,4 +97,4 @@ except Exception as e:
 finally:
     if version_file_path.exists():
         version_file_path.unlink()
-        print(f"🧹 Rimosso {version_file_path}")
+        print(f"Rimosso {version_file_path}")
