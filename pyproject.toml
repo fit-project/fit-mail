@@ -9,11 +9,11 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.13"
+python = ">=3.11,<3.14"
 PySide6 = "^6.9.0"
 
 
-fit-scraper = {git = "https://github.com/fit-project/fit-scraper.git", rev = "main"}
+fit-scraper = {git = "https://github.com/fit-project/fit-scraper.git", branch = "chore/update-python-compatibility-3.13"}
 pyinstaller = "^6.16.0"
 
 [build-system]

@@ -433,16 +433,16 @@ wmi = ["wmi (>=1.5.1) ; platform_system == \"Windows\""]
 
 [[package]]
 name = "fit-acquisition"
-version = "1.0.16"
+version = "1.0.0"
 description = "Utilities and base classes for content acquisition, shared across FIT scraper modules."
 optional = false
-python-versions = ">=3.11,<3.13"
+python-versions = ">=3.11,<3.14"
 groups = ["main"]
 files = []
 develop = false
 
 [package.dependencies]
-fit-cases = {git = "https://github.com/fit-project/fit-cases.git", rev = "main"}
+fit-cases = {git = "https://github.com/fit-project/fit-cases.git", branch = "chore/update-python-compatibility-3.13"}
 jinja2 = "^3.1.6"
 moviepy = "^2.1.2"
 nslookup = "^1.3.0"
@@ -459,15 +459,15 @@ xhtml2pdf = "^0.2.17"
 [package.source]
 type = "git"
 url = "https://github.com/fit-project/fit-acquisition.git"
-reference = "main"
-resolved_reference = "3fa2829fd1bffe82b9943ee3d09910359c03c961"
+reference = "chore/update-python-compatibility-3.13"
+resolved_reference = "1157ecdda55f01351a9ce6b0645ff897ad335efc"
 
 [[package]]
 name = "fit-assets"
-version = "0.1.17"
+version = "1.0.0"
 description = "Assets (icons, images, resources) for the FIT project"
 optional = false
-python-versions = ">=3.11,<3.13"
+python-versions = ">=3.11,<3.14"
 groups = ["main"]
 files = []
 develop = false
@@ -478,21 +478,21 @@ PySide6 = "6.9.0"
 [package.source]
 type = "git"
 url = "https://github.com/fit-project/fit-assets.git"
-reference = "main"
-resolved_reference = "b635d4996e3e21c45223c655751ffa8317672c46"
+reference = "chore/update-python-compatibility-3.13"
+resolved_reference = "a907de7f0260f98d943c765bd80a88dda9eac6fc"
 
 [[package]]
 name = "fit-cases"
-version = "1.0.9"
+version = "1.0.0"
 description = "Modulo di configurazione per il progetto FIT"
 optional = false
-python-versions = ">=3.9,<3.13"
+python-versions = ">=3.11,<3.14"
 groups = ["main"]
 files = []
 develop = false
 
 [package.dependencies]
-fit-configurations = {git = "https://github.com/fit-project/fit-configurations.git", rev = "main"}
+fit-configurations = {git = "https://github.com/fit-project/fit-configurations.git", branch = "chore/update-python-compatibility-3.13"}
 pillow = ">=10.2.0,<11.0.0"
 PySide6 = "6.9.0"
 sqlalchemy = "^2.0.40"
@@ -500,15 +500,15 @@ sqlalchemy = "^2.0.40"
 [package.source]
 type = "git"
 url = "https://github.com/fit-project/fit-cases.git"
-reference = "main"
-resolved_reference = "5b999927d78f37a888357e2d5509142f5a1354f9"
+reference = "chore/update-python-compatibility-3.13"
+resolved_reference = "d23afe42141f190d46ac8e1560f0090957d341e2"
 
 [[package]]
 name = "fit-common"
-version = "0.1.20"
+version = "1.0.0"
 description = "Shared code between modules of the FIT project"
 optional = false
-python-versions = ">=3.11,<3.13"
+python-versions = ">=3.11,<3.14"
 groups = ["main"]
 files = []
 develop = false
@@ -526,22 +526,22 @@ xhtml2pdf = "^0.2.17"
 [package.source]
 type = "git"
 url = "https://github.com/fit-project/fit-common.git"
-reference = "main"
-resolved_reference = "e5756d6319fbc4d867c3ab10561345bb705b3cad"
+reference = "chore/update-python-compatibility-3.13"
+resolved_reference = "cfce375e08ad0aedf62209af09574d2ed26cfe5d"
 
 [[package]]
 name = "fit-configurations"
-version = "1.0.11"
+version = "1.0.0"
 description = "This module provides the graphical interface for configuring settings used by the FIT application."
 optional = false
-python-versions = ">=3.11,<3.13"
+python-versions = ">=3.11,<3.14"
 groups = ["main"]
 files = []
 develop = false
 
 [package.dependencies]
-fit-assets = {git = "https://github.com/fit-project/fit-assets.git", rev = "main"}
-fit-common = {git = "https://github.com/fit-project/fit-common.git", rev = "main"}
+fit-assets = {git = "https://github.com/fit-project/fit-assets.git", branch = "chore/update-python-compatibility-3.13"}
+fit-common = {git = "https://github.com/fit-project/fit-common.git", branch = "chore/update-python-compatibility-3.13"}
 pyinstaller = "^6.16.0"
 PySide6 = "6.9.0"
 sqlalchemy = "^2.0.40"
@@ -549,28 +549,28 @@ sqlalchemy = "^2.0.40"
 [package.source]
 type = "git"
 url = "https://github.com/fit-project/fit-configurations.git"
-reference = "main"
-resolved_reference = "431e462704b1b05ea3f577768e5dbb2820d85e6c"
+reference = "chore/update-python-compatibility-3.13"
+resolved_reference = "1bb922fcbafba853498976e060f366f62179c405"
 
 [[package]]
 name = "fit-scraper"
 version = "0.2.3"
 description = "FIT Scraper Module"
 optional = false
-python-versions = ">=3.11,<3.13"
+python-versions = ">=3.11,<3.14"
 groups = ["main"]
 files = []
 develop = false
 
 [package.dependencies]
-fit-acquisition = {git = "https://github.com/fit-project/fit-acquisition.git", rev = "main"}
+fit-acquisition = {git = "https://github.com/fit-project/fit-acquisition.git", branch = "chore/update-python-compatibility-3.13"}
 PySide6 = "6.9.0"
 
 [package.source]
 type = "git"
 url = "https://github.com/fit-project/fit-scraper.git"
-reference = "main"
-resolved_reference = "ad250628aa6378713a0d101925b96f4ddc3b432e"
+reference = "chore/update-python-compatibility-3.13"
+resolved_reference = "e7acbf63a5e6ec92b109a32f131b6008e8c37dd9"
 
 [[package]]
 name = "freetype-py"
@@ -2588,5 +2588,5 @@ test = ["coverage (>=5.3)", "tomli (>=2.0.1) ; python_version < \"3.11\"", "tox"
 
 [metadata]
 lock-version = "2.1"
-python-versions = ">=3.11,<3.13"
-content-hash = "6c8ee0ebb46ba28a42b552d9578a714f9891f425ba1ed125a7b0de823423ac37"
+python-versions = ">=3.11,<3.14"
+content-hash = "8e54628521afff36ae461dad484ec96aba591bd99d33277d1ab355d25cad8db3"
