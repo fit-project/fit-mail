@@ -11,10 +11,12 @@ import logging
 from datetime import date, timedelta
 
 from fit_acquisition.class_names import class_names
-from fit_common.core import get_version
+from fit_acquisition.logger_names import LoggerName
+from fit_common.core import AcquisitionType, get_version
 from fit_common.gui.clickable_label import ClickableLabel
 from fit_common.gui.error import Error
 from fit_common.gui.spinner import Spinner
+from fit_common.gui.ui_translation import translate_ui
 from fit_scraper.scraper import Scraper
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import QDate
@@ -29,10 +31,10 @@ from fit_mail.workers.search import MailSearchWorker
 
 class Mail(Scraper):
     def __init__(self, wizard=None):
-        logger = logging.getLogger("scraper.mail")
+        logger = logging.getLogger(LoggerName.SCRAPER_MAIL.value)
         packages = ["fit_mail.tasks"]
 
-        super().__init__(logger, "email", packages, wizard)
+        super().__init__(logger, AcquisitionType.EMAIL, packages, wizard)
 
         if self.has_valid_case:
             class_names.register("SAVE_MESSAGES", "TaskSaveMessages")
@@ -128,6 +130,8 @@ class Mail(Scraper):
         self.ui.save_messages_button.setText(
             self.__translations["SAVE_MESSAGES_BUTTON"]
         )
+
+        translate_ui(self.__translations, self)
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPosition().toPoint()
