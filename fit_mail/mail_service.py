@@ -83,7 +83,7 @@ class MailService:
         start_time = time.time()
         self.mailbox.select(readonly=True)
 
-        stat, email_ids = self.mailbox.search(None, search_criteria)
+        stat, email_ids = self.__search(search_criteria)
 
         emails = email_ids[0].split()
         total_emails = len(emails)
@@ -161,7 +161,7 @@ class MailService:
                     )
                     continue
 
-                typ, data = self.mailbox.search(None, criteria)
+                typ, data = self.__search(criteria)
                 if typ != "OK" or not data:
                     continue
 
@@ -209,14 +209,24 @@ class MailService:
         self.__save_logs()
         return scraped_emails
 
+    def __search(self, criteria):
+        # imaplib otherwise encodes string arguments as ASCII. UTF-8 sessions
+        # require charset=None; other sessions need an explicit search charset.
+        charset = None
+        if not criteria.isascii() and not self.mailbox.utf8_enabled:
+            charset = "UTF-8"
+        return self.mailbox.search(charset, criteria.encode("utf-8"))
+
     def set_criteria(self, sender, recipient, subject, from_date, to_date):
         criteria = []
-        if sender != "":
-            criteria.append(f'(FROM "{sender}")')
-        if recipient != "":
-            criteria.append(f'(TO "{recipient}")')
-        if subject != "":
-            criteria.append(f'(SUBJECT "{subject}")')
+        # IMAP FROM, TO and SUBJECT already perform substring searches.
+        for key, value in (("FROM", sender), ("TO", recipient), ("SUBJECT", subject)):
+            value = (value or "").strip()
+            if value:
+                if any(char in value for char in ("\r", "\n", "\x00")):
+                    raise ValueError("Search text cannot contain CR, LF or NUL")
+                value = value.replace("\\", "\\\\").replace('"', '\\"')
+                criteria.append(f'({key} "{value}")')
 
         for loc in ("en_US.UTF-8", "en_US.utf8", "C.UTF-8", "C"):
             try:

@@ -25,16 +25,15 @@ class MailSearchWorker(TaskWorker):
         service = self.options.get("mail_service")
         fetch_time = None
 
-        if search_criteria:
-            search_criteria = service.set_criteria(
-                search_criteria.get("sender"),
-                search_criteria.get("recipient"),
-                search_criteria.get("subject"),
-                search_criteria.get("from_date"),
-                search_criteria.get("to_date"),
-            )
-
         try:
+            if search_criteria:
+                search_criteria = service.set_criteria(
+                    search_criteria.get("sender"),
+                    search_criteria.get("recipient"),
+                    search_criteria.get("subject"),
+                    search_criteria.get("from_date"),
+                    search_criteria.get("to_date"),
+                )
             fetch_time = service.estimate_email_fetch_time(search_criteria)
 
         except Exception as e:

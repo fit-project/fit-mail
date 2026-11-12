@@ -109,14 +109,6 @@ class Mail(Scraper):
         # SEARCH DATE TO
         self.ui.search_date_to.setDate(QtCore.QDate.currentDate())
 
-        # SEARCH EMAIL FROM
-        self.ui.search_email_from.textChanged.connect(self.__is_valid_search_mail)
-        self.ui.search_email_from.editingFinished.connect(self.__enable_search_button)
-
-        # SEARCH EMAIL TO
-        self.ui.search_email_to.textChanged.connect(self.__is_valid_search_mail)
-        self.ui.search_email_to.editingFinished.connect(self.__enable_search_button)
-
         # SEARCH BUTTON
         self.ui.search_button.clicked.connect(self.__search)
 
@@ -429,27 +421,12 @@ class Mail(Scraper):
         self.ui.save_messages_button.setEnabled(False)
         return super().on_post_acquisition_finished()
 
-    def __is_valid_search_mail(self, text):
-        self.is_valid_mail = self.__validate_mail(text)
-        self.ui.search_button.setEnabled(False)
-        if self.is_valid_mail is False:
-            self.sender().setStyleSheet("border: 1px solid red;")
-        else:
-            self.sender().setStyleSheet("")
-            self.ui.search_button.setEnabled(True)
-
     def __validate_mail(self, mail):
         email_validator = QtGui.QRegularExpressionValidator(
             QtCore.QRegularExpression(r"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}")
         )
         state = email_validator.validate(mail, 0)
         return bool(state[0] == QtGui.QRegularExpressionValidator.State.Acceptable)
-
-    def __enable_search_button(self):
-        if self.sender().text() == "" and self.ui.search_button.isEnabled() is False:
-            self.is_valid_email = True
-            self.sender().setStyleSheet("")
-            self.ui.search_button.setEnabled(True)
 
     def __enable_login_button(self, text):
         if self.sender().objectName() == "login":
