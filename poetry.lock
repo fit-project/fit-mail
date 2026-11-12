@@ -493,7 +493,7 @@ xhtml2pdf = "^0.2.17"
 type = "git"
 url = "https://github.com/fit-project/fit-acquisition.git"
 reference = "main"
-resolved_reference = "062af6b8be97d6e34bb20113a039105c0ba261c8"
+resolved_reference = "ae484ec6eaa939fa4c1656fa941fe3ddbf510943"
 
 [[package]]
 name = "fit-assets"
@@ -625,7 +625,7 @@ PySide6 = "6.9.0"
 type = "git"
 url = "https://github.com/fit-project/fit-scraper.git"
 reference = "main"
-resolved_reference = "1e5622412e21a009ef2795d3df669952d5a9d6fe"
+resolved_reference = "029aac6af71573ad13f5f63c665a25c6b16eea7f"
 
 [[package]]
 name = "html5lib"
