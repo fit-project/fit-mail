@@ -431,12 +431,12 @@ class Mail(Scraper):
 
     def __is_valid_search_mail(self, text):
         self.is_valid_mail = self.__validate_mail(text)
-        self.search_button.setEnabled(False)
+        self.ui.search_button.setEnabled(False)
         if self.is_valid_mail is False:
             self.sender().setStyleSheet("border: 1px solid red;")
         else:
             self.sender().setStyleSheet("")
-            self.search_button.setEnabled(True)
+            self.ui.search_button.setEnabled(True)
 
     def __validate_mail(self, mail):
         email_validator = QtGui.QRegularExpressionValidator(

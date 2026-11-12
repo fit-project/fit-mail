@@ -790,7 +790,7 @@ class Ui_fit_mail(object):
         self.search_email_subject.setMinimumSize(QtCore.QSize(0, 30))
         self.search_email_subject.setStyleSheet("background-color: rgb(33, 37, 43);")
         self.search_email_subject.setText("")
-        self.search_email_subject.setReadOnly(True)
+        self.search_email_subject.setReadOnly(False)
         self.search_email_subject.setObjectName("search_email_subject")
         self.verticalLayout_11.addWidget(self.search_email_subject)
         self.search_button_layout = QtWidgets.QHBoxLayout()
@@ -961,7 +961,8 @@ class Ui_fit_mail(object):
         fit_mail.setCentralWidget(self.styleSheet)
 
         self.retranslateUi(fit_mail)
-        QtCore.QMetaObject.connectSlotsByName(fit_mail)
+        # Signals are connected explicitly in Mail and Scraper. Auto-connection
+        # mistakes inherited on_* lifecycle slots for widget signal handlers.
 
     def retranslateUi(self, fit_mail):
         self.__translations = load_translations()
