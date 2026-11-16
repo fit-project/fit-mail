@@ -10,7 +10,6 @@ import email
 import hashlib
 import imaplib
 import io
-import locale
 import os
 import re
 import sys
@@ -85,10 +84,10 @@ class MailService:
 
         stat, email_ids = self.__search(search_criteria)
 
-        emails = email_ids[0].split()
+        emails = email_ids[0].split() if stat == "OK" and email_ids else []
         total_emails = len(emails)
 
-        selected_emails = email_ids[0].split()[:num_emails_test]
+        selected_emails = emails[:num_emails_test]
 
         for email_id in selected_emails:
             self.mailbox.fetch(email_id, "(BODY.PEEK[HEADER])")
@@ -217,10 +216,18 @@ class MailService:
             charset = "UTF-8"
         return self.mailbox.search(charset, criteria.encode("utf-8"))
 
-    def set_criteria(self, sender, recipient, subject, from_date, to_date):
+    def set_criteria(
+        self, sender, recipient, subject, from_date, to_date, body=None
+    ):
         criteria = []
-        # IMAP FROM, TO and SUBJECT already perform substring searches.
-        for key, value in (("FROM", sender), ("TO", recipient), ("SUBJECT", subject)):
+        # IMAP FROM, TO, SUBJECT and BODY already perform substring searches
+        # (case-insensitive, server side - RFC 3501 §6.4.4).
+        for key, value in (
+            ("FROM", sender),
+            ("TO", recipient),
+            ("SUBJECT", subject),
+            ("BODY", body),
+        ):
             value = (value or "").strip()
             if value:
                 if any(char in value for char in ("\r", "\n", "\x00")):
@@ -228,20 +235,27 @@ class MailService:
                 value = value.replace("\\", "\\\\").replace('"', '\\"')
                 criteria.append(f'({key} "{value}")')
 
-        for loc in ("en_US.UTF-8", "en_US.utf8", "C.UTF-8", "C"):
-            try:
-                locale.setlocale(locale.LC_TIME, loc)
-                break
-            except locale.Error:
-                continue
+        if from_date >= to_date:
+            raise ValueError("'from_date' must be earlier than 'to_date'")
 
         criteria.append(
-            f'(SINCE "{from_date.strftime("%d-%b-%Y")}" BEFORE "{to_date.strftime("%d-%b-%Y")}")'
+            f'(SINCE "{self.__imap_date(from_date)}" '
+            f'BEFORE "{self.__imap_date(to_date)}")'
         )
 
         # combine the search criteria
         params = " ".join(criteria)
         return params
+
+    @staticmethod
+    def __imap_date(value) -> str:
+        """RFC 3501 date (dd-Mon-yyyy) with English month names,
+        independent of the process locale."""
+        months = (
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        )
+        return f"{value.day:02d}-{months[value.month - 1]}-{value.year}"
 
     def write_emails(self, email_id, mail_dir, folder_stripped, folder):
         sel_typ, _ = self.mailbox.select(folder, readonly=True)
@@ -326,8 +340,11 @@ class MailService:
         filename = f"{md5_digest}.eml"
 
         email_path = os.path.join(folder_dir, filename)
+        # Write the raw bytes exactly as received from the server: re-serialising
+        # the parsed message can alter headers/line endings and break
+        # the evidence hash chain.
         with open(email_path, "wb") as f:
-            f.write(message.as_bytes())
+            f.write(bytes(raw_email))
 
         self.acquisition_emails_log += (
             "=========================================================\n"
@@ -343,9 +360,11 @@ class MailService:
         logs_buffer = io.StringIO()
         original_stderr = sys.stderr
         sys.stderr = logs_buffer
-        self.mailbox.print_log()
+        try:
+            self.mailbox.print_log()
+        finally:
+            sys.stderr = original_stderr
         self.imap_logs = self.imap_logs + "\n" + logs_buffer.getvalue()
-        sys.stderr = original_stderr
 
     def __decode_mime_header(self, header_value):
         if header_value is None:

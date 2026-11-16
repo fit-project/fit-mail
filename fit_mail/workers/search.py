@@ -33,6 +33,7 @@ class MailSearchWorker(TaskWorker):
                     search_criteria.get("subject"),
                     search_criteria.get("from_date"),
                     search_criteria.get("to_date"),
+                    body=search_criteria.get("body"),
                 )
             fetch_time = service.estimate_email_fetch_time(search_criteria)
 
