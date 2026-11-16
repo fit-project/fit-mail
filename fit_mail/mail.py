@@ -21,6 +21,7 @@ from fit_scraper.scraper import Scraper
 from PySide6 import QtCore, QtGui, QtWidgets
 from PySide6.QtCore import QDate
 
+from fit_mail.theme import ThemeManager, load_theme, DARK
 from fit_mail.lang import load_translations
 from fit_mail.mail_service import MailService
 from fit_mail.mail_ui import Ui_fit_mail
@@ -55,6 +56,11 @@ class Mail(Scraper):
 
         # CUSTOM TOP BAR
         self.ui.left_box.mouseMoveEvent = self.move_window
+
+        # THEME BUTTON (light / dark)
+        self.__theme = ThemeManager(self)
+        self.ui.theme_button.clicked.connect(self.__toggle_theme)
+        self.__apply_theme(load_theme())
 
         # MINIMIZE BUTTON
         self.ui.minimize_button.clicked.connect(self.showMinimized)
@@ -127,6 +133,13 @@ class Mail(Scraper):
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPosition().toPoint()
+
+    def __apply_theme(self, theme):
+        self.__theme.apply(theme)
+        self.ui.theme_button.setText("\u2600" if theme == DARK else "\u263d")
+
+    def __toggle_theme(self):
+        self.__apply_theme(self.__theme.toggle())
 
     def move_window(self, event):
         if event.buttons() == QtCore.Qt.MouseButton.LeftButton:
@@ -272,6 +285,7 @@ class Mail(Scraper):
                 "sender": self.ui.search_email_from.text(),
                 "recipient": self.ui.search_email_to.text(),
                 "subject": self.ui.search_email_subject.text(),
+                "body": self.ui.search_email_body.text(),
                 "from_date": selected_from_date,
                 "to_date": selected_to_date,
             },

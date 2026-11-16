@@ -50,5 +50,7 @@
   "MAIL_SCRAPER_FETCH_EMAILS": "Email individuate {} tempo stimato per il download: {} minuti, ",
   "MAIL_SCRAPER_FETCH_EMAILS_NO_TIME": "Trovate {} email.",
   "MAIL_SCRAPER_SEARCH_CRITERIA": "Avvio della ricerca delle email con il criterio: {}",
-  "MAIL_SCRAPER_SAVE_MESSAGES_EMAILS": "Tutte le email selezionate sono state scaricate"
+  "MAIL_SCRAPER_SAVE_MESSAGES_EMAILS": "Tutte le email selezionate sono state scaricate",
+  "SEARCH_EMAIL_BODY_PLACEHOLDER": "Testo nel corpo:",
+  "THEME_BUTTON_TOOLTIP": "Cambia tema chiaro/scuro"
 }

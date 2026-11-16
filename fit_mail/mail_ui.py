@@ -491,6 +491,18 @@ class Ui_fit_mail(object):
         self.configuration_button.setIconSize(QtCore.QSize(20, 20))
         self.configuration_button.setObjectName("configuration_button")
         self.horizontalLayout_2.addWidget(self.configuration_button)
+        self.theme_button = QtWidgets.QPushButton(
+            parent=self.right_buttons_container
+        )
+        self.theme_button.setMinimumSize(QtCore.QSize(28, 28))
+        self.theme_button.setMaximumSize(QtCore.QSize(28, 28))
+        self.theme_button.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor)
+        )
+        self.theme_button.setText("\u2600")  # sun; becomes moon in light mode
+        self.theme_button.setStyleSheet("font-size:16px;")
+        self.theme_button.setObjectName("theme_button")
+        self.horizontalLayout_2.addWidget(self.theme_button)
         self.minimize_button = QtWidgets.QPushButton(
             parent=self.right_buttons_container
         )
@@ -624,7 +636,7 @@ class Ui_fit_mail(object):
         self.verticalLayout_9.addWidget(self.server_configuration)
         self.search_criteria = QtWidgets.QFrame(parent=self.left_content)
         self.search_criteria.setEnabled(True)
-        self.search_criteria.setMaximumSize(QtCore.QSize(16777215, 283))
+        self.search_criteria.setMaximumSize(QtCore.QSize(16777215, 320))
         self.search_criteria.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.search_criteria.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.search_criteria.setObjectName("search_criteria")
@@ -793,6 +805,14 @@ class Ui_fit_mail(object):
         self.search_email_subject.setReadOnly(False)
         self.search_email_subject.setObjectName("search_email_subject")
         self.verticalLayout_11.addWidget(self.search_email_subject)
+        self.search_email_body = QtWidgets.QLineEdit(parent=self.search_criteria)
+        self.search_email_body.setEnabled(True)
+        self.search_email_body.setMinimumSize(QtCore.QSize(0, 30))
+        self.search_email_body.setStyleSheet("background-color: rgb(33, 37, 43);")
+        self.search_email_body.setText("")
+        self.search_email_body.setReadOnly(False)
+        self.search_email_body.setObjectName("search_email_body")
+        self.verticalLayout_11.addWidget(self.search_email_body)
         self.search_button_layout = QtWidgets.QHBoxLayout()
         self.search_button_layout.setObjectName("search_button_layout")
         spacerItem2 = QtWidgets.QSpacerItem(
@@ -1000,8 +1020,12 @@ class Ui_fit_mail(object):
         self.search_email_subject.setPlaceholderText(
             self.__translations["SEARCH_EMAIL_SUBJECT_PLACEHOLDER"]
         )
+        self.search_email_body.setPlaceholderText(
+            self.__translations["SEARCH_EMAIL_BODY_PLACEHOLDER"]
+        )
 
         self.search_button.setText(self.__translations["SEARCH_BUTTON_TEXT"])
+        self.theme_button.setToolTip(self.__translations["THEME_BUTTON_TOOLTIP"])
         self.email_founded_title.setText(self.__translations["EMAIL_FOUNDED_TITLE"])
         self.save_messages_button.setText(self.__translations["SAVE_MESSAGES_BUTTON"])
         self.credits_label.setText(self.__translations["CREDITS_LABEL"])

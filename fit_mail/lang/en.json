@@ -50,5 +50,7 @@
   "MAIL_SCRAPER_FETCH_EMAILS": "Found {} emails — estimated SAVE_MESSAGES time: {} minutes.",
   "MAIL_SCRAPER_FETCH_EMAILS_NO_TIME": "{} emails found.",
   "MAIL_SCRAPER_SEARCH_CRITERIA": "Start search emails whit criteria: {}",
-  "MAIL_SCRAPER_SAVE_MESSAGES_EMAILS": "Saved all selected emails"
+  "MAIL_SCRAPER_SAVE_MESSAGES_EMAILS": "Saved all selected emails",
+  "SEARCH_EMAIL_BODY_PLACEHOLDER": "Body text:",
+  "THEME_BUTTON_TOOLTIP": "Toggle light/dark theme"
 }
